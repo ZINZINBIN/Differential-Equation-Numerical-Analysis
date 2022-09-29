@@ -105,7 +105,7 @@ if __name__ == "__main__":
     coeffs_cheb = compute_coeffs(func, nodes_cheb)
     coeffs_uniform = compute_coeffs(func, nodes_uniform)
 
-    xs = generate_uniform_nodes(32, 0, 2)
+    xs = generate_uniform_nodes(32, lower, upper)
  
     y_cheb = compute_polynomials(xs, coeffs_cheb, nodes_cheb)
     y_uniform = compute_polynomials(xs, coeffs_uniform, nodes_uniform)
