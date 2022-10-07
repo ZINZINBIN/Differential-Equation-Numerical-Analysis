@@ -81,6 +81,34 @@ def NewtonMethod(func : Callable[[float],float], func_derivative : Callable[[flo
     return x_sol, is_success
 
 
+def SecantMethod(func : Callable[[float],float], x0 : float, x1 : float, n_iters : int = 128, tol : float = 1e-6):
+    xi = x0
+    xf = x1
+    x_sol = None
+    is_success = False
+    
+    def _fdm(func : Callable[[float], float], x_i : float, x_f : float):
+        return (func(x_f) - func(x_i)) / (x_f - x_i)
+
+    for n_iter in range(n_iters):
+        
+        # secant value
+        s = _fdm(func, xi, xf)
+        
+        # update new points 
+        xi = xf
+        xf = xi - func(xi) / s
+
+        # critiera
+        err = np.abs(xf - xi)
+
+        if err < tol:
+            is_success = True
+            
+    x_sol = xf
+    
+    return x_sol, is_success
+
 if __name__ == "__main__":
 
     x0 = 0.01
@@ -129,6 +157,3 @@ if __name__ == "__main__":
     m = 3
     x_sol, is_success = NewtonMethod(lambda x : func_05(x, m), lambda x : func_05_derivative(x, m), x_init, n_iters, tol)
     print("(problem) (x-1)^m = 0, (init) x = {:.5f}, (solution) x = {:.5f}, converge : {}".format(x_init, x_sol, is_success))
-    
-    # Secant Method
-    
