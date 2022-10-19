@@ -28,6 +28,12 @@ def integrate_trapezoid(func : Callable[[float],float], n_nodes : int, lower : f
     result *= h * 0.5
     return result
 
+def Romberg_Integral(func : Callable[[float], float], n : int, lower : float, upper : float):
+    h = upper - lower
+    
+    
+    
+
 if __name__ == "__main__":
     # Numerical Differential
     h_lst = [0.1, 0.01]

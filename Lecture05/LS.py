@@ -205,7 +205,9 @@ if __name__ == "__main__":
     A = np.array([[20,5,0,0,0],[5,15,5,0,0],[0,5,15,5,0],[0,0,5,15,5],[0,0,0,5,10]], dtype = np.float32)
     B = np.array([1100, 100, 100, 100, 100], dtype = np.float32)
     
-    # A_,B_,x = Naive_Gaussian_Elimination(A,B)
+    A_,B_,x = Naive_Gaussian_Elimination(A,B)
+    print("X : ", x)
+    
     A_,B_,x = Gaussian_Elimination_TriDiagonal(A,B)
     print("X : ", x)
     

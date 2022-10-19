@@ -31,6 +31,40 @@ def generate_uniform_nodes(n_nodes : int, lower : float, upper : float):
     result = lower + (upper - lower) * result
     return result
 
+def Bisection(func : Callable[[float], float], x1 : float, x2 : float, n_iters : int = 128, tol : float = 1e-6):
+    
+    xl = x1
+    xr = x2
+    
+    def _sgn(func : Callable[[float], float], x : float):
+        if func(x) > 0:
+            return 1
+        elif func(x) < 0:
+            return 0
+        else:
+            return -1
+    
+    is_converged = False
+    for n_iter in range(n_iters):
+        xm = xl + xr
+        xm /= 2
+        
+        if _sgn(func, xl) == _sgn(func, xm):
+            xl = xm
+        elif _sgn(func, xr) == _sgn(func, xm):
+            xr = xm
+        
+        if _sgn(func, xm) == -1:
+            is_converged = True
+            break
+        
+    if is_converged:
+        print("Bisection method success, x : {:.3f}, f(x) : {:.3f}, n_iter : {}".format(xm, func(xm), n_iter + 1))
+    else:
+        print("Bisection method failed, x : {:.3f}, f(x) : {:.3f}".format(xm, func(xm)))
+    return xm, is_converged
+        
+
 def FixedPointIteration(func : Callable[[float],float], x0 : float, n_iters : int = 128, tol : float = 1e-6):
     xi = x0
     xf = x0
@@ -114,7 +148,13 @@ if __name__ == "__main__":
     x0 = 0.01
     n_iters = 1024
     tol = 1e-6
+    
+    x_sol, is_success = Bisection(func_01, 0, 3.14, n_iters, tol)
+    is_success = "true" if is_success else "false"
 
+    print("(problem) x = cos(x), (solution) x = {:.5f}, converge : {}".format(x_sol, is_success))
+    print("cos(x) : {:5f}, x : {:5f}".format(func_01(x_sol) + x_sol, x_sol)) 
+    
     x_sol, is_success = FixedPointIteration(func_01, x0, n_iters, tol)
     is_success = "true" if is_success else "false"
 
