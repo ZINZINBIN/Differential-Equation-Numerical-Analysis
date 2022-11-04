@@ -6,6 +6,8 @@
 4. lecture 04 : Methods of least squares and Non-linear equations
 5. lecture 05 : Linear systems and Conjugate Gradient method(addition)
 6. lecture 06 : Ordinary differential equation with initial value problem
+7. lecture 07 : Boundary Value Problem with linear shooting and nonlinear shooting
+8. lecture 08 : Partial Differential Equation
 
 ### Homework
 1. HW01
