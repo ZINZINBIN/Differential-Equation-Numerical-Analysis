@@ -8,6 +8,10 @@
 6. lecture 06 : Ordinary differential equation with initial value problem
 7. lecture 07 : Boundary Value Problem with linear shooting and nonlinear shooting
 8. lecture 08 : Partial Differential Equation
+9. lecture 09 : Finite Difference Method
+10. lecture 10 : Finite Element Method 1
+11. lecture 11 : Lattice Boltzmann Method
+12. lecture 12 : Finite Element Method 2 
 
 ### Homework
 1. HW01
@@ -23,3 +27,8 @@ First, apply separation of variables. Next, describe how to solve the space-part
     Domain: -L≤x≤L (You can choose L, but L >> |x0|)
     Boundary conditions: ∂xu(0,-L) = ∂xu(0,L) = 0
 Draw or plot the state after some time. Discuss dependence on m and x0.
+
+
+### Reference
+- Lecture Notes on 편미분방정식의 수치해석 in Seoul National University
+- An introduction to numerical method, Wen Shen
