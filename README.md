@@ -12,6 +12,7 @@
 10. lecture 10 : Finite Element Method 1
 11. lecture 11 : Lattice Boltzmann Method
 12. lecture 12 : Finite Element Method 2 
+13. lecture 13 : Boundary Element Method & Spectral Element Method
 
 ### Homework
 1. HW01
