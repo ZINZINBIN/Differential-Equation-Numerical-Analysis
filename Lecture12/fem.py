@@ -95,32 +95,26 @@ class FDMsolver:
     def boundary(self):
         pass
 
-class FEMsolver:
-    def __init__(self, lx : float, ly : float, nx : int, ny : int):
-        self.nx = nx
-        self.ny = ny
-        self.lx = lx
-        self.ly = ly
-        self.hx = lx / nx
-        self.hy = ly / ny
-        
-        self.u = np.zeros((nx * ny, 1))
-        self.shape_fn = np.zeros(())
-        
-    # Linear rectangular method
-    def mesh(self):
-        pass
-    
-    # solve locally
-    def solve(self):
-        pass
-    
-    def postprocessing(self):
-        pass
-    
-    # boundary condition
-    def boundary(self):
-        pass
-
 if __name__ == "__main__":
-    pass
+    p_coord = [(-1,-1),(1,-1),(1,1),(-1,1),(0,-1),(1,0),(0,1),(-1,0),(0,0)]
+    
+    def shape_fn(x : float, y : float, idx : int):
+        if idx == 0:
+            return 0.25 * x * (1-x) * y * (1-y)
+        elif idx == 1:
+            return 0.25 * x * (1+x) * y * (1-y) * (-1)
+        elif idx == 2:
+            return 0.25 * x * (1+x) * y * (1+y)
+        elif idx == 3:
+            return 0.25 * x * (1-x) * y * (1+y) * (-1)
+        elif idx == 4:
+            return 0.5 * (1+x) * (1-x) * y * (1-y) * (-1)
+        elif idx == 5:
+            return 0.5 * (1+x) * (1-x) * y * (1-y)
+        elif idx == 6:
+            return 0.5 * x * (1+x) * (1+y) * (1-y)
+        elif idx == 7:
+            return 0.5 * x * (1-x) * y * (1-y) * (-1)
+        elif idx == 8:
+            return (1-x ** 2) * (1-y ** 2)
+        
