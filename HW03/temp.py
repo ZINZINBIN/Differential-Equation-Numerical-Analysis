@@ -1,4 +1,6 @@
 import meshio
+import matplotlib.pyplot as plt
+import matplotlib.tri as tri
 import numpy as np
 import dolfin as df
 
@@ -54,7 +56,7 @@ def load_mesh(mesh_file):
 
 
 if __name__ == "__main__":
-    msh_file = "problem01_mesh.msh"
+    msh_file = "tri_mesh_size_3.msh"
     mesh_file = "mesh.xdmf"
     line_file = "mf.xdmf"
 
@@ -98,10 +100,6 @@ if __name__ == "__main__":
     u = df.Function(V)
 
     df.solve(a == L, u, bcs)
-    
-    import matplotlib.pyplot as plt
-    import matplotlib.tri as tri
-    import numpy as np
     
     n = mesh.num_vertices()
     d = mesh.geometry().dim()
