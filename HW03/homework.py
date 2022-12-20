@@ -103,7 +103,7 @@ def plot_and_save(mesh, u, save_file : str = "test.png"):
     
 
 class Solver:
-    def __init__(self, msh_file : str, mesh_file : str, line_file : str, save_file : str):
+    def __init__(self, msh_file : str, mesh_file : str, line_file : str, save_file : str, degree : int = 2):
         self.msh_file = msh_file
         self.mesh_file = mesh_file
         self.line_file = line_file
@@ -113,6 +113,8 @@ class Solver:
         self.ffun = None
         self.u = None
         self.v = None
+        
+        self.degree = degree
         
         self.setup()
     
@@ -131,7 +133,7 @@ class Solver:
         if self.mesh is None:
             return
 
-        V = df.FunctionSpace(self.mesh, 'CG', 2)
+        V = df.FunctionSpace(self.mesh, 'CG', self.degree)
         
         domains = df.MeshFunction("size_t", self.mesh, self.mesh.topology().dim())
         
@@ -165,7 +167,7 @@ class Solver:
     def plot(self):
         plot_and_save(self.mesh, self.u, self.save_file)
     
-    def update_argument(self, msh_file : Optional[str] = None, mesh_file : Optional[str] = None, line_file : Optional[str] = None, save_file : Optional[str] = None):
+    def update_argument(self, msh_file : Optional[str] = None, mesh_file : Optional[str] = None, line_file : Optional[str] = None, save_file : Optional[str] = None, degree : Optional[int] = None):
         if mesh_file:
             self.mesh_file = mesh_file
         
@@ -178,21 +180,39 @@ class Solver:
         if save_file:
             self.save_file = save_file
             
+        if degree:
+            self.degree = degree
+            
         self.setup()
 
 if __name__ == "__main__":
     
-    # size 1
-    solver = Solver(msh_file = "tri_mesh_size_1.msh", mesh_file = "mesh_size_1.xdmf", line_file = "mf_size_1.xdmf", save_file="./sol_mesh_size_1.png")
+    # size 1, degree 2
+    solver = Solver(msh_file = "tri_mesh_size_1.msh", mesh_file = "mesh_size_1.xdmf", line_file = "mf_size_1.xdmf", save_file="./sol_mesh_size_1_degree_2.png")
     solver.solve()
     solver.plot()
     
-    # size 2
-    solver.update_argument(msh_file = "tri_mesh_size_2.msh", mesh_file = "mesh_size_2.xdmf", line_file = "mf_size_2.xdmf", save_file="./sol_mesh_size_2.png")
+    # size 2, degree 2
+    solver.update_argument(msh_file = "tri_mesh_size_2.msh", mesh_file = "mesh_size_2.xdmf", line_file = "mf_size_2.xdmf", save_file="./sol_mesh_size_2_degree_2.png")
     solver.solve()
     solver.plot()
     
-    # size 3
-    solver.update_argument(msh_file = "tri_mesh_size_3.msh", mesh_file = "mesh_size_3.xdmf", line_file = "mf_size_3.xdmf", save_file="./sol_mesh_size_3.png")
+    # size 3, degree 2
+    solver.update_argument(msh_file = "tri_mesh_size_3.msh", mesh_file = "mesh_size_3.xdmf", line_file = "mf_size_3.xdmf", save_file="./sol_mesh_size_3_degree_2.png", degree = 2)
+    solver.solve()
+    solver.plot()
+    
+    # size 2, degree 1
+    solver.update_argument(msh_file = "tri_mesh_size_3.msh", mesh_file = "mesh_size_3.xdmf", line_file = "mf_size_3.xdmf", save_file="./sol_mesh_size_3_degree_1.png", degree = 1)
+    solver.solve()
+    solver.plot()
+    
+    # size 2, degree 3
+    solver.update_argument(msh_file = "tri_mesh_size_3.msh", mesh_file = "mesh_size_3.xdmf", line_file = "mf_size_3.xdmf", save_file="./sol_mesh_size_3_degree_3.png", degree = 3)
+    solver.solve()
+    solver.plot()
+    
+    # size 2, degree 4
+    solver.update_argument(msh_file = "tri_mesh_size_3.msh", mesh_file = "mesh_size_3.xdmf", line_file = "mf_size_3.xdmf", save_file="./sol_mesh_size_3_degree_4.png", degree = 4)
     solver.solve()
     solver.plot()
